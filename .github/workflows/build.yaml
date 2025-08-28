@@ -11,7 +11,7 @@ jobs:
               repository: libsdl-org/SDL
               path: SDL
 
+          - run: ls
+
           - run: ${{ '"devenv SDL\VisualC\SDL\SDL.vcxproj /Build Release' }}
             shell: cmd
-
-          - run: ls
