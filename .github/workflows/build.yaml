@@ -13,5 +13,5 @@ jobs:
 
           - run: ls
 
-          - run: ${{ '"devenv SDL\VisualC\SDL\SDL.vcxproj /Build Release' }}
+          - run: ${{ '"devenv SDL\VisualC\SDL\SDL.vcxproj /Build Release"' }}
             shell: cmd
