@@ -7,9 +7,9 @@ jobs:
             - uses: actions/checkout@v4
             
             - uses: actions/checkout@v4
-                with:
-                    repository: libsdl-org/SDL
-                    path: SDL
+              with:
+                repository: libsdl-org/SDL
+                path: SDL
             
             - run: ${{ '"devenv SDL\VisualC\SDL\SDL.vcxproj /Build Release' }}
                 shell: cmd
