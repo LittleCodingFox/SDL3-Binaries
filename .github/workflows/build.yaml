@@ -22,6 +22,6 @@ jobs:
             copy /Y SDL\VisualC\SDL\x64\Release\SDL3.dll output
           
           - uses: actions/upload-artifact@v4
-              with:
-                name: SDL3-Windows
-                path: output
+            with:
+              name: SDL3-Windows
+              path: output
