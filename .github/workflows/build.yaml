@@ -10,7 +10,9 @@ jobs:
             with:
               repository: libsdl-org/SDL
               path: SDL
+          
+          - uses: microsoft/setup-msbuild@v2
 
           - run: ls
 
-          - run: MsBuild.exe "SDL\VisualC\SDL\SDL.vcxproj"
+          - run: MSBuild.exe "SDL\VisualC\SDL\SDL.vcxproj"
