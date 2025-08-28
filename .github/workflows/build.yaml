@@ -15,4 +15,4 @@ jobs:
 
           - run: ls
 
-          - run: MSBuild.exe "SDL\VisualC\SDL\SDL.vcxproj"
+          - run: MSBuild.exe "SDL\VisualC\SDL\SDL.vcxproj" /p:Configuration=Release;x64
