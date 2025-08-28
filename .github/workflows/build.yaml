@@ -17,9 +17,9 @@ jobs:
 
           - run: MSBuild.exe "SDL\VisualC\SDL\SDL.vcxproj" /p:Configuration=Release /p:Platform=x64
 
-          - run |
-            mkdir output
-            copy /Y SDL\VisualC\SDL\x64\Release\SDL3.dll output
+          - run: |
+              mkdir output
+              copy /Y SDL\VisualC\SDL\x64\Release\SDL3.dll output
           
           - uses: actions/upload-artifact@v4
             with:
