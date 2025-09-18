@@ -62,7 +62,7 @@ jobs:
 
           - run: cp build/libSDL3.so output/linux
           
-          - run: 'sh androidbuildlibs.sh'
+          - run: 'sh build-scripts/androidbuildlibs.sh'
             working-directory: 'SDL'
 
           - run: cp -R SDL output/android
