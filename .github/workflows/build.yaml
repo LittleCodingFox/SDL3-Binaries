@@ -62,12 +62,10 @@ jobs:
 
           - run: cp build/libSDL3.so output/linux
           
-          - run: 'cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_PLATFORM=26 -DANDROID_ABI=arm64-v8a -DCMAKE_INSTALL_PREFIX:String="Sdk" -B build_android -DCMAKE_BUILD_TYPE=Release -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-z,max-page-size=16384" -S SDL -G "Unix Makefiles"'
-          
-          - run: 'make'
-            working-directory: 'build_android'
+          - run: 'sh androidbuildlibs.sh'
+            working-directory: 'SDL'
 
-          - run: cp build_android/libSDL3.so output/android
+          - run: cp -R SDL output/android
           
           - uses: actions/upload-artifact@v4
             with:
