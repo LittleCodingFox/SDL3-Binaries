@@ -75,3 +75,34 @@ jobs:
             with:
               name: SDL3-LinuxAndroid
               path: output
+
+    macos:
+        runs-on: macos-14
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                submodules: "recursive"
+
+          - uses: actions/checkout@v4
+            with:
+              repository: libsdl-org/SDL
+              path: SDL
+
+          - uses: actions/setup-java@v4
+            with:
+              java-version: '17'
+              distribution: 'temurin'
+
+          - run: mkdir output
+          
+          - run: 'cmake -D CMAKE_SYSTEM_NAME=Darwin -D CMAKE_OSX_ARCHITECTURES=arm64 -D CMAKE_OSX_DEPLOYMENT_TARGET=13.0 -D CMAKE_C_FLAGS=-mmacosx-version-min=13.0 -D CMAKE_CXX_FLAGS=-mmacosx-version-min=13.0 -B build -DCMAKE_BUILD_TYPE=Release -S SDL -G "Unix Makefiles"'
+          
+          - run: 'make'
+            working-directory: 'build'
+
+          - run: cp -R build output
+          
+          - uses: actions/upload-artifact@v4
+            with:
+              name: SDL3-OSX
+              path: output
