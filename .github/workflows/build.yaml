@@ -75,13 +75,13 @@ jobs:
             with:
               name: SDL3-LinuxAndroid
               path: output
-
+    
     macos:
         runs-on: macos-14
         steps:
-            - uses: actions/checkout@v4
-              with:
-                submodules: "recursive"
+          - uses: actions/checkout@v4
+            with:
+              submodules: "recursive"
 
           - uses: actions/checkout@v4
             with:
