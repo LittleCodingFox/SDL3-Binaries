@@ -44,11 +44,6 @@ jobs:
               distribution: 'temurin'
         
           - uses: android-actions/setup-android@v3
-          
-          - run: sdkmanager --install "ndk;27.3.13750724"
-          
-          - run: which ndk-build
-            shell: bash
 
           - run: 'sudo apt update'
 
@@ -67,10 +62,12 @@ jobs:
 
           - run: cp build/libSDL3.so output/linux
           
-          - run: 'sh build-scripts/androidbuildlibs.sh'
-            working-directory: 'SDL'
+          - run: 'cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_PLATFORM=28 -DANDROID_ABI=arm64-v8a -B build_android -DCMAKE_BUILD_TYPE=Release -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-z,max-page-size=16384" -S SDL -G "Unix Makefiles"'
+          
+          - run: 'make'
+            working-directory: 'build_android'
 
-          - run: cp -R SDL output/android
+          - run: cp -R build_android output/android
           
           - uses: actions/upload-artifact@v4
             with:
