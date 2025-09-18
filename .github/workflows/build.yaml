@@ -100,7 +100,7 @@ jobs:
           - run: 'make'
             working-directory: 'build'
 
-          - run: cp -R build output
+          - run: cp build/libSDL3.dylib output
           
           - uses: actions/upload-artifact@v4
             with:
