@@ -50,15 +50,26 @@ jobs:
           - run: 'sudo apt install git build-essential git make pkg-config cmake ninja-build gnome-desktop-testing libasound2-dev libpulse-dev libaudio-dev libjack-dev libsndio-dev libx11-dev libxext-dev libxrandr-dev libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxtst-dev libxkbcommon-dev libdrm-dev libgbm-dev libgl1-mesa-dev libgles2-mesa-dev libegl1-mesa-dev libdbus-1-dev libibus-1.0-dev libudev-dev libpipewire-0.3-dev libwayland-dev libdecor-0-dev liburing-dev'
 
           - run: mkdir output
+          
+          - run: mkdir output/android
+          
+          - run: mkdir output/linux
             
           - run: 'cmake -DCMAKE_INSTALL_PREFIX:String="Sdk" -B build -DCMAKE_BUILD_TYPE=Release -S SDL -G "Unix Makefiles"'
           
           - run: 'make'
             working-directory: 'build'
 
-          - run: cp -R build output
+          - run: cp build/libSDL3.so output/linux
+          
+          - run: 'cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_PLATFORM=26 -DANDROID_ABI=arm64-v8a -DCMAKE_INSTALL_PREFIX:String="Sdk" -B build_android -DCMAKE_BUILD_TYPE=Release -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-z,max-page-size=16384" -S SDL -G "Unix Makefiles"'
+          
+          - run: 'make'
+            working-directory: 'build_android'
+
+          - run: cp build_android/libSDL3.so output/android
           
           - uses: actions/upload-artifact@v4
             with:
-              name: SDL3-Linux
+              name: SDL3-LinuxAndroid
               path: output
