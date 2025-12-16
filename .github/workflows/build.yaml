@@ -69,7 +69,7 @@ jobs:
           - run: 'make'
             working-directory: 'build_android'
 
-          - run: cp build_android/libSDL3.so output/android
+          - run: cp build_android/* output/android
           
           - run: llvm-strip --strip-unneeded output/android/libSDL3.so
           
